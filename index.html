@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b18">
+  <meta name="description" content="Portfolio of K. Mounika, a first-year Computer Science Engineering student.">
+  <title>K. Mounika | CSE Student Portfolio</title>
+  <style>
+    :root {
+      --bg:#090b18; --bg-soft:#10142a; --card:rgba(18,22,45,.78);
+      --border:rgba(148,163,255,.12); --text:#f7f8ff; --muted:#a9aec7;
+      --blue:#5f8cff; --purple:#9d66ff; --pink:#d66cff;
+      --nav-height:76px; --container:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:var(--nav-height)}
+    body{
+      font-family:"Segoe UI",Inter,Arial,sans-serif;color:var(--text);line-height:1.6;
+      background:radial-gradient(circle at 85% 8%,rgba(113,84,255,.14),transparent 24rem),
+      radial-gradient(circle at 10% 42%,rgba(58,135,255,.10),transparent 20rem),var(--bg);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:44px 44px;
+    }
+    a{color:inherit;text-decoration:none}
+    button,a{-webkit-tap-highlight-color:transparent}
+    .container{width:min(calc(100% - 40px),var(--container));margin-inline:auto}
+
+    .navbar{
+      position:fixed;top:0;left:0;width:100%;height:var(--nav-height);z-index:1000;
+      border-bottom:1px solid transparent;transition:.3s ease;
+    }
+    .navbar.scrolled{background:rgba(9,11,24,.88);backdrop-filter:blur(16px);border-bottom-color:var(--border)}
+    .nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;font-size:1.15rem;font-weight:800}
+    .logo-mark{
+      width:40px;height:40px;display:grid;place-items:center;border-radius:12px;
+      background:linear-gradient(135deg,var(--blue),var(--purple));
+      box-shadow:0 8px 24px rgba(112,97,255,.24);font-size:.95rem;
+    }
+    .nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+    .nav-link{position:relative;color:var(--muted);font-size:.92rem;font-weight:650;transition:.25s}
+    .nav-link::after{
+      content:"";position:absolute;left:0;bottom:-9px;width:100%;height:2px;border-radius:2px;
+      background:linear-gradient(90deg,var(--blue),var(--purple));transform:scaleX(0);transition:.25s;
+    }
+    .nav-link:hover,.nav-link.active{color:var(--text)}
+    .nav-link.active::after,.nav-link:hover::after{transform:scaleX(1)}
+    .menu-toggle{display:none;width:44px;height:44px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);cursor:pointer}
+    .menu-toggle span{display:block;width:20px;height:2px;margin:5px auto;border-radius:2px;background:currentColor;transition:.25s}
+
+    section{padding:100px 0}
+    .hero{min-height:100vh;display:flex;align-items:center;padding-top:calc(var(--nav-height) + 30px);position:relative}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:70px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:18px;color:#bdc7ff;font-size:.82rem;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+    .eyebrow::before{content:"";width:38px;height:2px;background:linear-gradient(90deg,var(--blue),var(--purple))}
+    .hero h1{max-width:780px;font-size:clamp(3.2rem,7vw,6.3rem);line-height:.98;letter-spacing:-4px;margin-bottom:22px}
+    .gradient-text{background:linear-gradient(135deg,#79a2ff 12%,#a66cff 70%,#d06dff);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero-intro{max-width:610px;color:var(--muted);font-size:clamp(1rem,2vw,1.18rem);margin-bottom:30px}
+    .hero-intro strong{color:#dde2ff}
+    .tagline{display:flex;align-items:center;gap:10px;min-height:28px;margin-bottom:34px;color:#cfd5ff;font-weight:700}
+    .cursor{width:2px;height:20px;background:var(--purple);animation:blink .8s infinite}
+    @keyframes blink{50%{opacity:0}}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+    .btn{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 20px;border:1px solid transparent;border-radius:13px;font-weight:800;font-size:.92rem;cursor:pointer;transition:.25s}
+    .btn:hover{transform:translateY(-3px)}
+    .btn-primary{background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 12px 30px rgba(105,91,255,.25)}
+    .btn-secondary{background:rgba(255,255,255,.035);border-color:var(--border)}
+    .btn-secondary:hover{border-color:rgba(159,139,255,.48);box-shadow:0 12px 30px rgba(8,10,24,.35)}
+
+    .hero-visual{position:relative;min-height:520px;display:grid;place-items:center}
+    .orbit{position:absolute;width:480px;height:480px;border:1px solid rgba(139,157,255,.09);border-radius:50%;animation:rotate 18s linear infinite}
+    .orbit::before,.orbit::after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:var(--blue);box-shadow:0 0 18px var(--blue)}
+    .orbit::before{top:70px;right:76px}.orbit::after{bottom:35px;left:110px;background:var(--pink);box-shadow:0 0 18px var(--pink)}
+    @keyframes rotate{to{transform:rotate(360deg)}}
+    .profile-frame{
+      position:relative;width:390px;height:470px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;
+      border:1px solid rgba(176,187,255,.16);border-radius:48% 48% 26px 26px;
+      background:linear-gradient(145deg,rgba(98,139,255,.18),rgba(157,102,255,.08)),var(--bg-soft);
+      box-shadow:0 30px 80px rgba(0,0,0,.32);
+    }
+    .profile-frame::before{content:"";position:absolute;width:300px;height:300px;top:55px;border-radius:50%;background:linear-gradient(135deg,rgba(95,140,255,.35),rgba(157,102,255,.28));filter:blur(2px)}
+    .avatar{position:relative;z-index:2;width:260px;height:330px;display:grid;place-items:center;margin-bottom:-18px;border:1px solid rgba(255,255,255,.14);border-radius:130px 130px 32px 32px;background:linear-gradient(145deg,#4d72c7,#23285c 55%,#15172f);font-size:6.2rem;font-weight:900;letter-spacing:-8px;text-shadow:0 12px 30px rgba(0,0,0,.25)}
+    .floating-card{
+      position:absolute;z-index:5;display:flex;align-items:center;gap:10px;padding:12px 15px;
+      border:1px solid var(--border);border-radius:14px;background:rgba(16,20,42,.86);
+      backdrop-filter:blur(12px);box-shadow:0 16px 34px rgba(0,0,0,.24);font-size:.78rem;font-weight:800;animation:float 4s ease-in-out infinite;
+    }
+    .floating-card.top{top:70px;right:-12px}.floating-card.bottom{bottom:55px;left:-10px;animation-delay:-2s}
+    .status-dot{width:9px;height:9px;border-radius:50%;background:#65d8a7;box-shadow:0 0 14px #65d8a7}
+    @keyframes float{50%{transform:translateY(-8px)}}
+
+    .section-heading{max-width:700px;margin-bottom:42px}
+    .section-heading.center{margin-inline:auto;text-align:center}
+    .section-kicker{color:#9daaff;font-size:.78rem;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;margin-bottom:10px}
+    .section-heading h2{font-size:clamp(2rem,4vw,3.3rem);line-height:1.1;letter-spacing:-1.5px}
+    .section-heading p{margin-top:14px;color:var(--muted)}
+
+    .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px}
+    .about-card,.goal-card{border:1px solid var(--border);border-radius:22px;background:var(--card);backdrop-filter:blur(10px)}
+    .about-card{padding:34px}.goal-card{padding:34px}
+    .about-card h3,.goal-card h3{font-size:1.25rem;margin-bottom:18px}
+    .about-card p,.goal-card p{color:var(--muted)}
+    .info-list{display:grid;gap:14px;margin-top:24px}
+    .info-item{display:flex;align-items:flex-start;gap:12px;color:#dfe3fa}
+    .icon-box{flex:0 0 38px;width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:rgba(105,126,255,.12);color:#9cafff}
+    .info-item strong{display:block;font-size:.8rem;color:var(--muted);margin-bottom:2px}
+    .goal-card{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .goal-card h3,.goal-card>p{grid-column:1/-1}.goal-card>p{margin-bottom:6px}
+    .mini-card{min-height:145px;padding:20px;border:1px solid rgba(148,163,255,.09);border-radius:16px;background:rgba(255,255,255,.025)}
+    .mini-card .icon-box{margin-bottom:14px}.mini-card h4{margin-bottom:5px;font-size:.95rem}.mini-card p{font-size:.86rem}
+
+    .skills-grid,.projects-grid,.achievements-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .skill-card{min-height:175px;padding:24px;border:1px solid var(--border);border-radius:18px;background:var(--card);transition:.28s}
+    .skill-card:hover{transform:translateY(-7px);border-color:rgba(130,137,255,.38);box-shadow:0 18px 40px rgba(4,5,17,.32)}
+    .skill-icon{width:48px;height:48px;display:grid;place-items:center;margin-bottom:18px;border-radius:14px;background:linear-gradient(135deg,rgba(95,140,255,.18),rgba(157,102,255,.15));color:#9eafff;font-weight:800}
+    .skill-card h3{font-size:1rem;margin-bottom:7px}.skill-card p{color:var(--muted);font-size:.84rem}
+
+    .project-card{grid-column:span 1;min-height:330px;overflow:hidden;border:1px solid var(--border);border-radius:20px;background:var(--card);transition:.3s}
+    .project-card.featured{grid-column:span 2}
+    .project-card:hover{transform:translateY(-8px);border-color:rgba(147,132,255,.38);box-shadow:0 22px 50px rgba(3,4,15,.38)}
+    .project-cover{height:180px;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 70% 30%,rgba(166,108,255,.28),transparent 28%),linear-gradient(135deg,#18234a,#221a4c)}
+    .project-card:nth-child(2) .project-cover{background:radial-gradient(circle at 30% 30%,rgba(95,140,255,.32),transparent 30%),linear-gradient(135deg,#17264c,#30204e)}
+    .project-card:nth-child(3) .project-cover{background:radial-gradient(circle at 60% 35%,rgba(214,108,255,.20),transparent 28%),linear-gradient(135deg,#1a2045,#261844)}
+    .project-cover svg{filter:drop-shadow(0 14px 24px rgba(0,0,0,.25));transition:.3s}
+    .project-card:hover .project-cover svg{transform:scale(1.07) rotate(-2deg)}
+    .project-content{padding:22px}.project-content h3{margin-bottom:7px;font-size:1.08rem}.project-content p{min-height:48px;color:var(--muted);font-size:.86rem}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.tag{padding:5px 9px;border:1px solid rgba(148,163,255,.12);border-radius:999px;color:#bbc5ff;background:rgba(105,126,255,.07);font-size:.72rem;font-weight:700}
+
+    .achievement-card{grid-column:span 2;display:flex;align-items:flex-start;gap:16px;padding:26px;border:1px solid var(--border);border-radius:18px;background:var(--card)}
+    .achievement-icon{flex:0 0 52px;height:52px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(135deg,rgba(95,140,255,.17),rgba(157,102,255,.16));color:#aebaff}
+    .achievement-card h3{font-size:1.05rem;margin-bottom:6px}.achievement-card p{color:var(--muted);font-size:.88rem}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:stretch}
+    .contact-panel{padding:38px;border:1px solid var(--border);border-radius:22px;background:var(--card)}
+    .contact-panel h3{font-size:1.55rem;margin-bottom:12px}.contact-panel>p{color:var(--muted);margin-bottom:24px}
+    .contact-links{display:grid;gap:12px}
+    .contact-link{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid rgba(148,163,255,.09);border-radius:14px;background:rgba(255,255,255,.025);transition:.25s}
+    .contact-link:hover{transform:translateX(5px);border-color:rgba(148,163,255,.28);background:rgba(105,126,255,.07)}
+    .contact-link .icon-box{flex-basis:42px;height:42px}.contact-link strong{display:block;font-size:.86rem}.contact-link span{color:var(--muted);font-size:.78rem}
+    .contact-cta{position:relative;min-height:300px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;overflow:hidden;padding:38px;border:1px solid rgba(169,155,255,.14);border-radius:22px;background:linear-gradient(135deg,rgba(74,118,220,.20),rgba(130,76,201,.16))}
+    .contact-cta::after{content:"";position:absolute;width:260px;height:260px;right:-90px;bottom:-130px;border-radius:50%;border:40px solid rgba(153,128,255,.07)}
+    .contact-cta h3{max-width:440px;font-size:clamp(1.8rem,3vw,2.7rem);line-height:1.12;margin-bottom:20px}
+
+    footer{border-top:1px solid var(--border);padding:24px 0}.footer-inner{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:.82rem}
+    .back-to-top{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--border);border-radius:12px;background:var(--card);transition:.25s}.back-to-top:hover{transform:translateY(-4px);color:#bcc5ff}
+    .reveal{opacity:0;transform:translateY(24px);transition:.7s}.reveal.visible{opacity:1;transform:translateY(0)}
+
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr .72fr;gap:20px}.hero-visual{min-height:440px}
+      .profile-frame{width:330px;height:410px}.orbit{width:390px;height:390px}.avatar{width:220px;height:290px;font-size:5.2rem}
+      .skills-grid{grid-template-columns:repeat(2,1fr)}.project-card.featured{grid-column:span 2}.project-card:not(.featured){grid-column:span 1}.achievement-card{grid-column:span 2}
+    }
+    @media(max-width:760px){
+      :root{--nav-height:68px}.container{width:min(calc(100% - 32px),var(--container))}section{padding:72px 0}
+      .menu-toggle{display:block}.menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.menu-toggle.open span:nth-child(2){opacity:0}.menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+      .nav-links{position:absolute;top:68px;left:16px;right:16px;display:grid;gap:4px;padding:10px;border:1px solid var(--border);border-radius:16px;background:rgba(9,11,24,.98);box-shadow:0 20px 50px rgba(0,0,0,.38);opacity:0;visibility:hidden;transform:translateY(-8px);transition:.25s}
+      .nav-links.open{opacity:1;visibility:visible;transform:translateY(0)}.nav-link{display:block;padding:12px 14px}.nav-link::after{display:none}
+      .hero{min-height:auto;padding-top:120px;padding-bottom:50px}.hero-grid{grid-template-columns:1fr;text-align:center}.eyebrow,.tagline{justify-content:center}.eyebrow::before{display:none}.hero h1{letter-spacing:-2.5px}.hero-intro{margin-inline:auto}.hero-actions{justify-content:center}
+      .hero-visual{min-height:430px;margin-top:10px}.profile-frame{width:min(330px,88vw);height:390px}.orbit{width:min(380px,92vw);height:min(380px,92vw)}.floating-card.top{right:2px}.floating-card.bottom{left:2px}
+      .about-grid,.contact-grid{grid-template-columns:1fr}.projects-grid{grid-template-columns:1fr}.project-card.featured,.project-card:not(.featured),.achievement-card{grid-column:1}.achievements-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:520px){
+      .hero h1{font-size:3.25rem}.hero-actions{flex-direction:column}.btn{width:100%}.hero-visual{min-height:390px}.profile-frame{height:350px}.avatar{width:210px;height:260px}.floating-card{padding:9px 11px}.floating-card.top{top:38px}.floating-card.bottom{bottom:24px}.skills-grid{grid-template-columns:1fr}.goal-card{grid-template-columns:1fr}.goal-card h3,.goal-card>p{grid-column:1}.achievement-card{flex-direction:column}.contact-panel,.contact-cta{padding:26px}.footer-inner{gap:14px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a class="logo" href="#home" aria-label="Go to home"><span class="logo-mark">KM</span><span>K. Mounika</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a class="nav-link active" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#skills">Skills</a></li>
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <p class="eyebrow">Hello, I'm</p>
+          <h1>K. <span class="gradient-text">Mounika</span></h1>
+          <p class="hero-intro">A first-year <strong>Computer Science Engineering</strong> student building strong fundamentals and creating useful digital experiences.</p>
+          <p class="tagline" aria-live="polite"><span id="typeText">Learning. Building. Growing.</span><span class="cursor"></span></p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View My Work
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <button class="btn btn-secondary" id="downloadResume" type="button">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14"/></svg>
+              Download Resume
+            </button>
+          </div>
+        </div>
+        <div class="hero-visual reveal" aria-label="Profile illustration">
+          <div class="orbit"></div><div class="profile-frame"><div class="avatar" aria-label="KM profile placeholder">KM</div></div>
+          <div class="floating-card top"><span class="status-dot"></span> Open to learning</div>
+          <div class="floating-card bottom">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9daaff" stroke-width="2" aria-hidden="true"><path d="M12 2l3 6 6.5 1-4.7 4.6L18 20l-6-3.2L6 20l1.2-6.4L2.5 9 9 8l3-6z"/></svg>CSE Student
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading reveal"><p class="section-kicker">About Me</p><h2>Curious mind. <span class="gradient-text">Growing developer.</span></h2></div>
+        <div class="about-grid">
+          <article class="about-card reveal">
+            <h3>My Journey</h3><p>I am an enthusiastic first-year Computer Science Engineering student with a strong interest in learning how technology can solve real-world problems.</p>
+            <div class="info-list">
+              <div class="info-item"><span class="icon-box"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 10l9-5 9 5-9 5-9-5z"/><path d="M7 12v5c2.7 2 7.3 2 10 0v-5"/></svg></span><div><strong>Education</strong>First-year CSE Student</div></div>
+              <div class="info-item"><span class="icon-box"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><strong>Focus</strong>AI, Web Development &amp; Problem Solving</div></div>
+            </div>
+          </article>
+          <article class="goal-card reveal">
+            <h3>What drives me</h3><p>I enjoy exploring new ideas, improving my skills through hands-on projects, and collaborating with people who share a passion for technology.</p>
+            <div class="mini-card"><span class="icon-box"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><h4>Career Goal</h4><p>Become a skilled software engineer who builds meaningful, user-focused products.</p></div>
+            <div class="mini-card"><span class="icon-box"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><h4>Passion</h4><p>Turning curiosity and consistent learning into creative technical solutions.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading center reveal"><p class="section-kicker">Skills</p><h2>My <span class="gradient-text">toolkit</span></h2><p>Technical foundations and interpersonal skills I use to learn, collaborate, and grow.</p></div>
+        <div class="skills-grid">
+          <article class="skill-card reveal"><div class="skill-icon">C</div><h3>C Programming</h3><p>Core logic, fundamentals, and structured programming.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">Py</div><h3>Python Basics</h3><p>Syntax, variables, functions, and beginner projects.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">H</div><h3>HTML</h3><p>Semantic structure and accessible web pages.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">#</div><h3>CSS</h3><p>Responsive layouts, visuals, and modern styling.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">JS</div><h3>JavaScript Basics</h3><p>Interactivity, events, and client-side logic.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4z"/></svg></div><h3>Communication</h3><p>Clear expression and active listening.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 20c0-4 2-7 6-7s6 3 6 7M15 14c3 0 5 2 5 6"/></svg></div><h3>Teamwork</h3><p>Cooperation, shared goals, and mutual support.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3h6l1 3 3 1v6l-3 1-1 4H9l-1-4-3-1V7l3-1 1-3z"/><path d="M9 10h6M12 7v6"/></svg></div><h3>Problem Solving</h3><p>Logical thinking and creative solutions.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading reveal"><p class="section-kicker">Projects</p><h2>Selected <span class="gradient-text">work</span></h2></div>
+        <div class="projects-grid">
+          <article class="project-card featured reveal">
+            <div class="project-cover"><svg width="130" height="130" viewBox="0 0 130 130" fill="none" aria-hidden="true"><circle cx="65" cy="65" r="47" stroke="#A5B2FF" stroke-opacity=".45" stroke-width="2"/><path d="M65 99V55M65 74c-16 0-27-10-27-25 16-1 27 8 27 25ZM65 85c15 0 27-9 27-24-15-1-27 8-27 24Z" stroke="#BBD0FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="65" cy="65" r="61" stroke="#9D66FF" stroke-opacity=".18" stroke-width="8"/></svg></div>
+            <div class="project-content"><h3>Crop Care AI</h3><p>An AI smart farming assistant concept designed to help users make informed crop-care decisions.</p><div class="tags"><span class="tag">AI</span><span class="tag">Agriculture</span><span class="tag">Innovation</span></div></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-cover"><svg width="130" height="100" viewBox="0 0 130 100" fill="none" aria-hidden="true"><rect x="13" y="8" width="104" height="84" rx="8" stroke="#A8B7FF" stroke-width="4"/><path d="M13 25h104M26 17h2M35 17h2M44 17h2" stroke="#A8B7FF" stroke-width="3" stroke-linecap="round"/><path d="M35 40h28M35 49h43M35 58h20M35 67h34" stroke="#C5CEFF" stroke-width="4" stroke-linecap="round"/></svg></div>
+            <div class="project-content"><h3>Personal Portfolio Website</h3><p>A responsive single-page portfolio showcasing my profile, skills, projects, and achievements.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></div>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-cover"><svg width="110" height="110" viewBox="0 0 110 110" fill="none" aria-hidden="true"><rect x="14" y="14" width="82" height="82" rx="20" stroke="#BBB0FF" stroke-opacity=".7" stroke-width="4"/><path d="M55 29v52M29 55h52" stroke="#D0C8FF" stroke-width="5" stroke-linecap="round"/><circle cx="55" cy="55" r="39" stroke="#9D66FF" stroke-opacity=".25" stroke-width="8"/></svg></div>
+            <div class="project-content"><h3>Future Projects</h3><p>Upcoming applications focused on practical problem-solving, learning, and positive community impact.</p><div class="tags"><span class="tag">In Progress</span><span class="tag">Ideas</span></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements">
+      <div class="container">
+        <div class="section-heading center reveal"><p class="section-kicker">Achievements</p><h2>Learning <span class="gradient-text">milestones</span></h2></div>
+        <div class="achievements-grid">
+          <article class="achievement-card reveal"><div class="achievement-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M8.5 12L7 22l5-3 5 3-1.5-10"/></svg></div><div><h3>Wadhwani Foundation Courses</h3><p>Completed professional development and employability certificate courses to strengthen career skills.</p></div></article>
+          <article class="achievement-card reveal"><div class="achievement-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div><div><h3>India-Japan Hackathon</h3><p>Participated in a collaborative hackathon experience, gaining exposure to innovation and teamwork.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading reveal"><p class="section-kicker">Contact</p><h2>Let's <span class="gradient-text">connect</span></h2></div>
+        <div class="contact-grid">
+          <div class="contact-panel reveal">
+            <h3>Get in touch</h3><p>I am always open to learning opportunities, collaborations, and conversations.</p>
+            <div class="contact-links">
+              <a class="contact-link" href="mailto:kmounika@example.com"><span class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><strong>Email</strong><span>kmounika@example.com</span></div></a>
+              <a class="contact-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><span class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></span><div><strong>LinkedIn</strong><span>Connect professionally</span></div></a>
+              <a class="contact-link" href="https://github.com/" target="_blank" rel="noopener noreferrer"><span class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 00-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0019.3 4 5 5 0 0019.1.5S18 1 15 3a13 13 0 00-6 0C6 1 4.9.5 4.9.5A5 5 0 004.7 4a5.4 5.4 0 00-1.5 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 009 18v4"/></svg></span><div><strong>GitHub</strong><span>Explore my code</span></div></a>
+            </div>
+          </div>
+          <div class="contact-cta reveal"><p class="section-kicker">Start a conversation</p><h3>Have an idea or opportunity?</h3><a class="btn btn-primary" href="mailto:kmounika@example.com">Send me an email<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-inner"><p>&copy; <span id="year"></span> K. Mounika. All rights reserved.</p><a class="back-to-top" href="#home" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a></div></footer>
+
+  <script>
+    const navbar=document.getElementById("navbar");
+    const menuToggle=document.getElementById("menuToggle");
+    const navLinks=document.getElementById("navLinks");
+    const links=document.querySelectorAll(".nav-link");
+    const sections=document.querySelectorAll("main section");
+
+    menuToggle.addEventListener("click",()=>{
+      const isOpen=navLinks.classList.toggle("open");
+      menuToggle.classList.toggle("open",isOpen);
+      menuToggle.setAttribute("aria-expanded",String(isOpen));
+      menuToggle.setAttribute("aria-label",isOpen?"Close navigation menu":"Open navigation menu");
+    });
+    links.forEach(link=>link.addEventListener("click",()=>{
+      navLinks.classList.remove("open");menuToggle.classList.remove("open");menuToggle.setAttribute("aria-expanded","false");
+    }));
+    window.addEventListener("scroll",()=>{
+      navbar.classList.toggle("scrolled",window.scrollY>20);
+      let current="home";
+      sections.forEach(section=>{if(window.scrollY>=section.offsetTop-180)current=section.id});
+      links.forEach(link=>link.classList.toggle("active",link.getAttribute("href")==="#"+current));
+    });
+
+    const revealObserver=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");revealObserver.unobserve(entry.target)}});
+    },{threshold:.12});
+    document.querySelectorAll(".reveal").forEach(element=>revealObserver.observe(element));
+
+    const phrases=["Learning. Building. Growing.","Passionate about technology.","Ready for new opportunities."];
+    const typeText=document.getElementById("typeText");
+    let phraseIndex=0,characterIndex=phrases[0].length,deleting=true;
+    function typePhrase(){
+      const phrase=phrases[phraseIndex];
+      if(deleting){
+        characterIndex--;typeText.textContent=phrase.slice(0,characterIndex);
+        if(characterIndex===0){deleting=false;phraseIndex=(phraseIndex+1)%phrases.length}
+      }else{
+        const nextPhrase=phrases[phraseIndex];characterIndex++;typeText.textContent=nextPhrase.slice(0,characterIndex);
+        if(characterIndex===nextPhrase.length){deleting=true;setTimeout(typePhrase,1400);return}
+      }
+      setTimeout(typePhrase,deleting?35:55);
+    }
+    setTimeout(typePhrase,1800);
+
+    document.getElementById("downloadResume").addEventListener("click",()=>{
+      const resume=`K. MOUNIKA
+Computer Science Engineering Student
+
+PROFILE
+Enthusiastic first-year CSE student passionate about technology,
+problem solving, and building useful digital experiences.
+
+EDUCATION
+First-year Computer Science Engineering Student
+
+SKILLS
+C Programming, Python Basics, HTML, CSS, JavaScript Basics,
+Communication, Teamwork, and Problem Solving
+
+PROJECTS
+• Crop Care AI - AI Smart Farming Assistant
+• Personal Portfolio Website
+• Future Projects
+
+ACHIEVEMENTS
+• Wadhwani Foundation course certificates
+• India-Japan Hackathon participation
+
+CONTACT
+Email: kmounika@example.com
+LinkedIn: https://www.linkedin.com/
+GitHub: https://github.com/`;
+      const blob=new Blob([resume],{type:"text/plain;charset=utf-8"});
+      const url=URL.createObjectURL(blob);
+      const link=document.createElement("a");
+      link.href=url;link.download="K-Mounika-Resume.txt";document.body.appendChild(link);link.click();link.remove();
+      URL.revokeObjectURL(url);
+    });
+    document.getElementById("year").textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
